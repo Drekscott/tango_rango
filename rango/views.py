@@ -55,9 +55,10 @@ def add_page(request, category_name_slug):
         form = PageForm(request.POST)
         if form.is_valid():
             if cat:
-                page = form.save(commit=False)
+                page = form.save(commit=False
+                )
                 page.category = cat
-                pave.views = 0
+                page.views = 0
                 page.save()
                 return category(request, category_name_slug)
         else:
@@ -65,6 +66,7 @@ def add_page(request, category_name_slug):
     else:
         form = PageForm()
         
-    context_dict = {'form':form, 'category': cat}
+    context_dict = {'form':form, 'category': cat, 'category_name_slug': category_name_slug}
     
     return render(request, 'rango/add_page.html', context_dict)
+
