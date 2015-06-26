@@ -8,7 +8,18 @@
     </head>
 
     <body>
-        <h1>Rango says...hello world!</h1>
+      
+      {% if user.is_authenticated%}
+      <h1>Rango says...hello {{user.username}}!</h1>
+      <a href="/rango/restricted/">Restricted Page</a><br />
+      <a href="/rango/logout/">Logout</a><br />
+      <a href="/rango/add_category/">Add a New Category</a><br />
+        
+      {%else%}
+      <h1>Rango says...hello stranger! Get comfortable and login</h1>
+      <a href="/rango/register/">Register Here</a><br />
+      <a href="/rango/login/">Login</a><br />
+      {%endif%}
         {% if categories %}
               <ul>
                 
@@ -32,7 +43,6 @@
         {% endif %}
         <a href="/rango/about/">About</a><br />
         <img src="{% static "images/imgres.jpg" %}" alt="Picture of Rango" />
-        <a href="/rango/add_category/">Add a New Category</a><br />
     </body>
 
 </html>
