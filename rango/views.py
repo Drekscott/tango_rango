@@ -106,7 +106,7 @@ def register(request):
     return render(request, 'rango/register.html', {'user_form': user_form, 'profile_form': profile_form, 'registered': registered})
     
 def user_login(request):
-    
+    context = {}
     if request.method == 'POST':
         
         username = request.POST.get('username')
@@ -123,11 +123,11 @@ def user_login(request):
             else:
                 return HttpResponse('Your account is disabled.')
         else:
-            print "Invalid login details: {0}, {1}".format(username, password)
-            return HttpResponseRedirect('/rango/login')
+            context['login_error'] = "Invalid login details: {0}, {1}".format(username, password) + " please try again"
+            return render(request, 'rango/login.html', context)
             
     else:
-        return render(request,'rango/login.html', {})
+        return render(request,'rango/login.html', context)
 
 @login_required    
 def restricted(request):
