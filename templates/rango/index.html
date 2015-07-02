@@ -8,13 +8,13 @@
     </head>
 
     <body>
-      
+
       {% if user.is_authenticated%}
       <h1>Rango says...hello {{user.username}}!</h1>
       <a href="/rango/restricted/">Restricted Page</a><br />
       <a href="/rango/logout/">Logout</a><br />
       <a href="/rango/add_category/">Add a New Category</a><br />
-        
+
       {%else%}
       <h1>Rango says...hello stranger! Get comfortable and login</h1>
       <a href="/rango/register/">Register Here</a><br />
@@ -22,26 +22,26 @@
       {%endif%}
         {% if categories %}
               <ul>
-                
+
                   {% for category in categories %}
-                  <li><a href="/rango/category/{{ category.slug }}">{{ category.name }}</li>
+                  <li><a href="{% url 'category'  category.slug %}">{{ category.name }}</li>
                   {% endfor %}
-                  
+
               </ul>
           {% else %}
               <strong>There are no categories present.</strong>
           {% endif %}
-          
-          
+
+
           <h3>Top 5 viewed</h3>
         {% if categories_views %}
               <ol>
                   {% for category in categories_views %}
-                  <li><a href="/rango/category/{{ category.slug }}">{{ category.name }}</li>
+                  <li><a href="{% url 'category' category.slug %}">{{ category.name }}</li>
                   {% endfor %}
               </ol>
         {% endif %}
-        <a href="/rango/about/">About</a><br />
+        <a href="{% url 'about' %}">About</a><br />
         <img src="{% static "images/imgres.jpg" %}" alt="Picture of Rango" />
     </body>
 
