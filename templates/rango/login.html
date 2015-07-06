@@ -10,7 +10,7 @@
         {% if login_error %}
           <p>{{ login_error }}</p>
         {% endif %}
-        <form id="login_form" method="post" action="/rango/login/">
+        <form id="login_form" method="post" action="{% url 'login'%}">
             {% csrf_token %}
             Username: <input type="text" name="username" value="" size="50" />
             <br />
